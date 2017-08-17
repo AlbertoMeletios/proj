@@ -17,11 +17,33 @@ angular.module('starter.controllers', [])
 .controller('MenuCtrl', function($scope, MenuService){
   $scope.menu = MenuService.all();
   
-  console.log($scope.menu);
+  //console.log($scope.menu);
   
 })
 
+.controller('PlatilloCtrl', function($scope, MenuService){
+  $scope.platillos = MenuService.all()[1];
+  
+  console.log($scope.platillos);
+})
 
+.controller('GuarnicionCtrl', function($scope, MenuService){
+  $scope.guarniciones = MenuService.all()[2];
+  
+  //console.log($scope.g)
+})
+
+.controller('BebidaCtrl', function($scope, MenuService){
+  $scope.bebidas = MenuService.all()[3];
+})
+
+
+
+
+.controller('historialCtrl', function ($scope, $stateParams, pedidoService){
+  $scope.pedido = pedidoService.get($stateParams.pedidoYear);
+  console.log($scope.pedido);
+})
 
 .controller('DashCtrl', function($scope) {})
 

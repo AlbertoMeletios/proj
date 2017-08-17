@@ -1,16 +1,11 @@
-<ion-view>
-    <ion-content>
-        <div class="list">
-            <label class="item item-input item-select">
-                <div class="input-label">
-                Lightsaber
-                </div>
-                <select>
-                <option>Blue</option>
-                <option selected>Green</option>
-                <option>Red</option>
-                </select>
-            </label>
-        </div>
+<ion-view view-title="Historial">
+    <ion-content ng-controller="historialCtrl">
+        <!--<div class="list" ng-repeat="pedido in pedido">
+             <a class="item" href="/#/mes">  {{pedido.timestamp}} </a>
+        </div>-->
+        <div class="list" >
+                <a class="item" href="/#/mes" ng-repeat="pedido in pedido">  {{pedido.timestamp}} </a>
+           </div>
+    
     </ion-content>
 </ion-view>

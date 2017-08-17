@@ -30,7 +30,6 @@ angular.module('starter.services', [])
     mes:'JULIO/',
     year:'2017:'
   }, {
-    id: 1,
     name: 'Platillos',
     dato1: 'enchiladas suizas',
     dato2: 'enchiladas rojas',
@@ -39,16 +38,14 @@ angular.module('starter.services', [])
     dato5: 'chicharrón rojo',
     dato6: 'chicharrón azul',
   }, {
-    id: 2,
-    name: 'Guarniciones',
+    name: 'Guarnicion',
     dato1: 'arroz rojo',
     dato2: 'arroz jardinero',
     dato3: 'frijol',
     dato4: 'sopa verde',
     dato5: 'espagueti',
   }, {
-    id: 3,
-    name: 'Bebidas',
+    name: 'bebida',
     dato1: 'té',
     dato2: 'jamaica',
     dato3: 'piña',
@@ -62,6 +59,91 @@ angular.module('starter.services', [])
 })
 
 
+
+
+
+
+.factory('pedidoService', function(){
+  var pedidos = [{
+    id:0,
+    autor:1,
+    platillo:1,
+    guarniciones:1,
+    bebidas:2,
+    timestamp:'2016-01-14'
+  }, {
+	  id:1,
+    autor:1,
+    platillo:5,
+    guarniciones:3,
+    bebidas:3,
+    timestamp:'2016-02-12' 
+  }, {
+	  id:2,
+    autor:1,
+    platillo:3,
+    guarniciones:2,
+    bebidas:1,
+    timestamp:'2017-01-23'  
+  }, {
+	  id:3,
+    autor:1,
+    platillo:4,
+    guarniciones:3,
+    bebidas:2,
+    timestamp:'2017-02-20'  
+  }, {
+    id:4,
+    autor:1,
+    platillo:4,
+    guarniciones:3,
+    bebidas:2,
+    timestamp:'2015-02-20'  
+  }, {     	  
+    id:5,
+    autor:1,
+    platillo:6,
+    guarniciones:3,
+    bebidas:1,
+    timestamp:'2017-01-15'
+  }];
+
+   return {
+      all: function() {
+        return pedidos;
+      },
+       get: function(pedidoYear){
+         var filter = [];
+
+         var anio = 0;
+
+         for(i=0; i<pedidos.length; i++){
+            var split = pedidos[i].timestamp.split('-');
+
+
+            if(split[0] =! parseInt(pedidoYear)){
+              filter.push(pedidos[i]);
+            }
+            else
+              return null;
+
+           }
+         return filter;
+      }
+    };
+
+}) 
+
+/*
+.factory('Historiales', function{
+  let historiales = [{
+    id: 0,
+    ano: 2017,
+    mes: 'Agosto',
+    dia: '11',
+  }];
+})
+*/
 // DO NOT TOUCH
 .factory('Chats', function() {
 

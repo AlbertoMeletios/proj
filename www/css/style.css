@@ -1,1 +1,31 @@
 /* Empty. Add your own CSS if you like */
+html{
+    --color: #fe9949;
+ /* background-color: var(--color) ;*/
+}
+.contLog{
+    text-align: center; 
+}
+.log{
+    width: 200px;
+    padding: 15px;
+    margin: 40px 0; 
+}
+.botLog{
+    background-color: var(--color);
+    width: 200px;
+    color: #fff;
+    margin-top: 50px;
+}
+.iLog{
+    margin-bottom: 30px;
+}
+.imgInicio{
+    width: 150px;
+    margin-bottom: 20px;
+}
+.btnIni{
+    background: var(--color);
+    width: 150px;
+    color: #fff;
+}

@@ -1,0 +1,13 @@
+<ion-view view-title="Guarnicion">
+    <ion-content ng-controller="GuarnicionCtrl">
+       <ion-list ng-repeat="guarniciones in guarniciones">
+            <ion-checkbox class="checkbox-dark" ng-model="filter.red">{{guarniciones}}</ion-checkbox>
+            
+        </ion-list> 
+
+<a href="/#/bebida"><button class="button icon-right ion-chevron-right button-block button-dark">
+  siguente
+</button></a>
+    </ion-content>
+</ion-view>
+

@@ -43,14 +43,43 @@ angular.module('cuisine', ['ionic', 'starter.controllers', 'starter.services'])
       controller : 'MenuCtrl'
     })
 
+
     .state('platillo',{
       url:'/platillo',
-      templateUrl: 'templates/platillo.html'
+      templateUrl: 'templates/platillo.html',
+      controller : 'PlatilloCtrl'
+    })
+    .state('guarnicion',{
+      url:'/guarnicion',
+      templateUrl: 'templates/guarnicion.html',
+      contoller: 'GuarnicionCtrl' 
+    })
+    .state('bebida',{
+      url: '/bebida',
+      templateUrl: 'templates/bebida.html',
+      controller: 'BebidaCtrl'
+    })
+    .state('confirmacion',{
+      url: '/confirmacion',
+      templateUrl: 'templates/confirmacion.html'
+    })
+    .state('gracias',{
+      url: '/gracias',
+      templateUrl: 'templates/gracias.html'
     })
 
     .state('hostorial',{
       url:'/historial',
-      templateUrl: 'templates/historial.html'
+      templateUrl: 'templates/historial.html',
+      controller: 'historialCtrl'
+    })
+    .state('mes',{
+      url:'/mes',
+      templateUrl: 'templates/mes.html'
+    })
+    .state('pedidos',{
+      url:'/pedidos',
+      templateUrl: 'templates/pedidos.html'
     })
     
 
@@ -103,6 +132,6 @@ angular.module('cuisine', ['ionic', 'starter.controllers', 'starter.services'])
   });
 
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/menu');
+  $urlRouterProvider.otherwise('/login');
 
 });
