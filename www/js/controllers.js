@@ -13,61 +13,74 @@ angular.module('starter.controllers', [])
   $scope.get();
 })
 */
-
 .controller('MenuCtrl', function($scope, MenuService){
-  $scope.menu = MenuService.all();
-  
-  //console.log($scope.menu);
-  
+  $scope.menuDelDia = [];
+  $scope.get = function (){
+    MenuService.get().then(function(data){
+      $scope.menuDelDia = data.data;
+      console.log($scope.menuDelDia);
+    });
+  };
+  $scope.get();
+  console.log($scope.menu);
 })
 
 .controller('PlatilloCtrl', function($scope, MenuService){
-  $scope.platillos = MenuService.all()[1];
-  
-  console.log($scope.platillos);
+  $scope.platillos = [];
+  $scope.get = function (){
+    MenuService.get().then(function(data){
+      $scope.platillos = data.data;
+      console.log($scope.platillos);
+
+    });
+  };
+  $scope.get();
 })
 
 .controller('GuarnicionCtrl', function($scope, MenuService){
-  $scope.guarniciones = MenuService.all()[2];
-  
+  $scope.guarniciones = [];
+  $scope.get = function (){
+    MenuService.get().then(function(data){
+      $scope.guarniciones = data.data;
+      console.log($scope.guarniciones);
+
+    });
+  };
+  $scope.get();
   //console.log($scope.g)
 })
 
 .controller('BebidaCtrl', function($scope, MenuService){
-  $scope.bebidas = MenuService.all()[3];
+  $scope.bebidas = [];
+  $scope.get = function (){
+    MenuService.get().then(function(data){
+      $scope.bebidas = data.data;
+      console.log($scope.bebidas);
+
+    });
+  };
+  $scope.get();
+  //console.log($scope.g)
 })
 
+.controller('PruebaCtrl', function ($scope, $stateParams, PruebaService){
+  $scope.prueba = [];
+  $scope.get = function (){
+    PruebaService.get().then(function(data){
+      $scope.prueba = data.data;
+      console.log($scope.prueba);
 
+    });
+  };
+  $scope.get();
+  //console.log($scope.g)
+})
 
-
-.controller('historialCtrl', function ($scope, $stateParams, pedidoService){
-  $scope.pedido = pedidoService.get($stateParams.pedidoYear);
+/*
+.controller('HistorialCtrl', function ($scope, $stateParams, PruebaService){
+  $scope.pedido = PruebaService.get($stateParams.pedidoYear);
   console.log($scope.pedido);
-})
+})*/
 
-.controller('DashCtrl', function($scope) {})
 
-.controller('ChatsCtrl', function($scope, Chats) {
-  // With the new view caching in Ionic, Controllers are only called
-  // when they are recreated or on app start, instead of every page change.
-  // To listen for when this page is active (for example, to refresh data),
-  // listen for the $ionicView.enter event:
-  //
-  //$scope.$on('$ionicView.enter', function(e) {
-  //});
-
-  $scope.chats = Chats.all();
-  $scope.remove = function(chat) {
-    Chats.remove(chat);
-  };
-})
-
-.controller('ChatDetailCtrl', function($scope, $stateParams, Chats) {
-  $scope.chat = Chats.get($stateParams.chatId);
-})
-
-.controller('AccountCtrl', function($scope) {
-  $scope.settings = {
-    enableFriends: true
-  };
-});
+;

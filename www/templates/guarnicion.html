@@ -1,7 +1,7 @@
 <ion-view view-title="Guarnicion">
     <ion-content ng-controller="GuarnicionCtrl">
        <ion-list ng-repeat="guarniciones in guarniciones">
-            <ion-checkbox class="checkbox-dark" ng-model="filter.red">{{guarniciones}}</ion-checkbox>
+            <ion-checkbox class="checkbox-dark" ng-model="filter.red">{{guarniciones.guarnicion}}</ion-checkbox>
             
         </ion-list> 
 

@@ -1,7 +1,7 @@
 <ion-view view-title="Bebida">
     <ion-content ng-controller="BebidaCtrl">
        <ion-list ng-repeat="bebidas in bebidas">
-            <ion-checkbox class="checkbox-dark" ng-model="filter.red">{{bebidas}}</ion-checkbox>
+            <ion-checkbox class="checkbox-dark" ng-model="filter.red">{{bebidas.bebida}}</ion-checkbox>
         </ion-list> 
 <a href="/#/confirmacion"><button class="button icon-right ion-chevron-right button-block button-dark">
   siguente
