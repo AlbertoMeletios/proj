@@ -13,6 +13,7 @@ angular.module('starter.controllers', [])
   $scope.get();
 })
 */
+
 .controller('MenuCtrl', function($scope, MenuService){
   $scope.menuDelDia = [];
   $scope.get = function (){
@@ -25,8 +26,14 @@ angular.module('starter.controllers', [])
   console.log($scope.menu);
 })
 
-.controller('PlatilloCtrl', function($scope, MenuService){
+
+
+
+.controller('PlatilloCtrl', function($scope, MenuService, $rootScope){
   $scope.platillos = [];
+  
+  $rootScope.guardarPlatillo = {};
+
   $scope.get = function (){
     MenuService.get().then(function(data){
       $scope.platillos = data.data;
@@ -35,10 +42,18 @@ angular.module('starter.controllers', [])
     });
   };
   $scope.get();
+
+  $scope.guardarPlatillo = function(){
+    $scope.platillos.push($rootScope.guardarPlatillo);
+  }
 })
 
-.controller('GuarnicionCtrl', function($scope, MenuService){
+
+
+
+.controller('GuarnicionCtrl', function($scope, MenuService, $rootScope){
   $scope.guarniciones = [];
+  
   $scope.get = function (){
     MenuService.get().then(function(data){
       $scope.guarniciones = data.data;
@@ -48,6 +63,7 @@ angular.module('starter.controllers', [])
   };
   $scope.get();
   //console.log($scope.g)
+  console.log($rootScope.guardarPlatillo);
 })
 
 .controller('BebidaCtrl', function($scope, MenuService){
@@ -75,7 +91,19 @@ angular.module('starter.controllers', [])
   $scope.get();
   //console.log($scope.g)
 })
-
+/*
+.controller('EnviarPedidoCtrl', function ($scope, $http, $rootScope){
+  $rootScope.pedido = [$scope.pedidirPlatillo];  
+  
+})*/
+.controller('GuardarPedidoCtrl',function($http,$scope){
+  var guarda = {
+      method: 'POST',
+      url:'http://etnia.digital/cuisine/api/pedidos',
+      data:{platillo:$scope.splatillo, bebida: $scope.sbebida},
+      dataType:"jsonp"
+  }
+})
 /*
 .controller('HistorialCtrl', function ($scope, $stateParams, PruebaService){
   $scope.pedido = PruebaService.get($stateParams.pedidoYear);

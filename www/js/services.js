@@ -27,7 +27,7 @@ angular.module('starter.services', [])
       var obj = {content:null};
       var direccion = "http://etnia.digital/cuisine/api/pedidos";
       $http({
-        method : "GET", 
+        method : "POST", 
         url :  direccion
       }).then(function successCallback(response) {
           deferred.resolve(response);

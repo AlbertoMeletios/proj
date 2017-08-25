@@ -1,16 +1,18 @@
 <ion-view view-title="Menú del día"> 
     <ion-content ng-controller="MenuCtrl">
             <div class="item item-divider">PLATILLOS</div> 
-            <div  class="list" ng-repeat="menuDelDia in menuDelDia" style="margin-bottom:0;">
+            <div  class="list" ng-repeat="menuDelDia in menuDelDia" style="margin-bottom:-2px;">
                 <a class="item">{{menuDelDia.platillo}}</a>
             </div>
             <div class="item item-divider">GUARNICIONES</div> 
-            <div  class="list" ng-repeat="menuDelDia in menuDelDia" style="margin-bottom:0;">
-                <a class="item">{{menuDelDia.guarnicion}}</a>
+            <div  class="list" ng-repeat="menuDelDia in menuDelDia" style="margin-bottom:-2px   ;">
+                <!--<a class="item" ng-if="menuDelDia.guarnicion.indexOf(menuDelDia.guarnicion) ===0">{{menuDelDia.guarnicion}}</a> -->
+                <a class="item" ng-if="menuDelDia.guarnicion !=0">{{menuDelDia.guarnicion}}</a>
             </div>
             <div class="item item-divider">BEBIDAS</div> 
-            <div  class="list" ng-repeat="menuDelDia in menuDelDia" style="margin-bottom:0;">
-                <a class="item">{{menuDelDia.bebida}}</a>
+            <div  class="list" ng-repeat="menuDelDia in menuDelDia" style="margin-bottom:-2px;">
+                <!--<a class="item" ng-if="menuDelDia.bebida.indexOf(menuDelDia.bebida) === 0">{{menuDelDia.bebida}}</a> -->
+                <a class="item" ng-if="menuDelDia.bebida != 0">{{menuDelDia.bebida}}</a>
             </div>
     </ion-content>
 </ion-view>
