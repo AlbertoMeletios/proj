@@ -54,11 +54,6 @@ angular.module('cuisine', ['ionic', 'starter.controllers', 'starter.services'])
       templateUrl: 'templates/guarnicion.html',
       contoller: 'GuarnicionCtrl' 
     })
-    .state('guarnicion2',{
-      url:'/guarnicion2',
-      templateUrl: 'templates/guarnicion2.html',
-      contoller: 'GuarnicionCtrl' 
-    })
     .state('bebida',{
       url: '/bebida',
       templateUrl: 'templates/bebida.html',

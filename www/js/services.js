@@ -20,7 +20,7 @@ angular.module('starter.services', [])
   };
 })
 
-.factory('PruebaService', function($http, $q) {
+.factory('PedidosService', function($http, $q) {
   return {
     get: function(){
       var deferred = $q.defer();

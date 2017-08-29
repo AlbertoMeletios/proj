@@ -1,15 +1,15 @@
 <ion-view view-title="Bebida">
     <ion-content ng-controller="BebidaCtrl">
-       <ion-list ng-repeat="bebidas in bebidas">
+       <ion-list ng-repeat="bebida in bebidas">
             <ion-checkbox 
-            ng-if="bebidas.bebida !=0" 
-            value="bebidas.bebidas.b_id"
+            ng-if="bebida.bebida !=0" 
+            value="bebida.b_id"
             ng-click="addBebida(bebida.b_id)"
             ng-model="bebida.checked"
-            ng-change="consoleLog(bebidas)"
-            ng.disabled="checked >=1 && !bebidas.checked" 
-            style="margin-top:-9px;">
-            {{bebidas.bebida}}</ion-checkbox>            
+            ng-change="consoleLog(bebida)"
+            ng.disabled="checked >=1 && !bebida.checked" 
+            style="margin-top:-5px;">
+            {{bebida.bebida}}</ion-checkbox>            
         </ion-list> 
 <button class="button icon-right ion-chevron-right button-block button-dark" ng-click="guardarBebida()">
   siguente

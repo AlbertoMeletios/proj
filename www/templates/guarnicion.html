@@ -3,8 +3,8 @@
        <ion-list ng-repeat="guarniciones in guarniciones">
             <ion-checkbox 
             ng-if="guarniciones.guarnicion !=0" 
-            value="guarniciones.guarniciones.g_id"
-            ng-click="addGuarnicion(guarnicion.g_id)"
+            value="guarniciones.g_id"
+            ng-click="addGuarnicion(guarniciones.g_id)"
             ng-model="guarniciones.checked"
             ng-change="consoleLog(guarniciones)"
             ng-disabled="checked >= 2 && !guarniciones.checked" 

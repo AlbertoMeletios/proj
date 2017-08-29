@@ -29,31 +29,40 @@ angular.module('starter.controllers', [])
 
 
 
-.controller('PlatilloCtrl', function($scope, MenuService, $rootScope){
+.controller('PlatilloCtrl', function($scope, MenuService, $rootScope, $state){
   $scope.platillos = [];
-  
-  $rootScope.guardarPlatillo = {};
+  $rootScope.pedido = {};
 
   $scope.get = function (){
     MenuService.get().then(function(data){
       $scope.platillos = data.data;
       console.log($scope.platillos);
-
     });
   };
   $scope.get();
 
-  $scope.guardarPlatillo = function(){
-    $scope.platillos.push($rootScope.guardarPlatillo);
-  }
+  $scope.checked = 0;
+  $scope.consoleLog = function(platillo){
+    console.log(platillo.p_id);
+    if(platillo.checked)
+      $scope.checked++;
+    else 
+      $scope.checked--;
+  };
+
+  $scope.addPlatillo = function(p_id){
+    $rootScope.pedido.platillo = p_id;   
+  };
+  
+  $scope.guardarPlatillo = function() {
+    $state.go('guarnicion');
+
+  };
 })
-
-
-
-
 
 .controller('GuarnicionCtrl', function($scope, MenuService, $rootScope, $state){
   $scope.guarniciones = [];
+  //$rootScope.pedido.guarniciones = {};
   
   $scope.get = function (){
     MenuService.get().then(function(data){
@@ -62,60 +71,62 @@ angular.module('starter.controllers', [])
     });
   };
   $scope.get();
-  //console.log($scope.g)
-  console.log($scope.pedido);
 
+  
   $scope.checked = 0;
   $scope.consoleLog = function(guarniciones){
-    console.log(guarniciones);
+    console.log(guarniciones.g_id);
     if(guarniciones.checked)
       $scope.checked++;
     else 
       $scope.checked--;
   };
-  $scope.addGuarnicion = function(id){
-    $rootScope.pedido.guarniciones.g_id = (id);
-   
+ 
+  $scope.addGuarnicion = function(g_id){
+   //$rootScope.guarniciones.push(g_id); 
   };
-
+  
   $scope.guardarGuarnicion = function() {
     $state.go('bebida');
   };
-  
 })
 
 
 
 .controller('BebidaCtrl', function($scope, MenuService, $rootScope, $state){
   $scope.bebidas = [];
+
   $scope.get = function (){
     MenuService.get().then(function(data){
       $scope.bebidas = data.data;
       console.log($scope.bebidas);
     });
   };
+  
   $scope.get();
-  //console.log($scope.g)
-  console.log($scope.pedido);
+
+ 
 
   $scope.checked = 0;
   $scope.consoleLog = function(bebida){
-    console.log(bebida);
+    console.log(bebida.b_id);
     if(bebida.checked)
       $scope.checked++;
     else 
       $scope.checked--;
   };
 
-  $scope.addBebida = function(id){
-    $rootScope.pedido.bebida = id;
+  $scope.addBebida = function(b_id){
+    //$rootScope.pedido.bebida = b_id;
    
   };
 
   $scope.guardarBebida = function() {
     $state.go('confirmacion');
   };
+  
 })
+
 
 .controller('PruebaCtrl', function ($scope, $stateParams, PruebaService){
   $scope.prueba = [];
