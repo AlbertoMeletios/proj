@@ -4,7 +4,7 @@
             <ion-checkbox 
             ng-if="bebida.bebida !=0" 
             value="bebida.b_id"
-            ng-click="addBebida(bebida.b_id)"
+            ng-click="addBebida(bebida)"
             ng-model="bebida.checked"
             ng-change="consoleLog(bebida)"
             ng-disabled="checked >=1 && !bebida.checked" 

@@ -2,24 +2,42 @@ angular.module('starter.controllers', [])
 
 
 
-.controller('MenuCtrl', function($scope, MenuService){
-  $scope.menuDelDia = [];
-  $scope.get = function (){
-    MenuService.get().then(function(data){
-      $scope.menuDelDia = data.data;
-      console.log($scope.menuDelDia);
+.controller('MenuCtrl', function($scope, MenuPService, MenuGService, MenuBService){
+  $scope.menuPlatillo = [];
+  $scope.getP = function (){
+    MenuPService.get().then(function(data){
+      $scope.menuPlatillo = data.data;
+      console.log($scope.menuPlatillo);
     });
   };
-  $scope.get();
-  console.log($scope.menu);
+  $scope.getP();
+
+  $scope.menuGuarnicion = [];
+  $scope.getG = function (){
+    MenuGService.get().then(function(data){
+      $scope.menuGuarnicion = data.data;
+      console.log($scope.menuGuarnicion);
+    });
+  };
+  $scope.getG();
+
+  $scope.menuBebida = [];
+  $scope.getB = function (){
+    MenuBService.get().then(function(data){
+      $scope.menuBebida = data.data;
+      console.log($scope.menuBebida);
+    });
+  };
+  $scope.getB();
+
 })
 
-.controller('PlatilloCtrl', function($scope, MenuService, $rootScope, $state){
+.controller('PlatilloCtrl', function($scope, MenuPService, $rootScope, $state){
    $scope.platillos = [];
   $rootScope.pedido = {};
 
   $scope.get = function (){
-    MenuService.get().then(function(data){
+    MenuPService.get().then(function(data){
       $scope.platillos = data.data;
       console.log($scope.platillos);
     });
@@ -35,9 +53,9 @@ angular.module('starter.controllers', [])
       $scope.checked--;
   };
 
-  $scope.addPlatillo = function(p_id, platillo){
-    $rootScope.pedido.platilloId = p_id;
-    $rootScope.pedido.platillo = platillo; 
+  $scope.addPlatillo = function(platillo){
+    $rootScope.pedido.platilloId = platillo.p_id;
+    $rootScope.pedido.platillo = platillo.platillo; 
   };
 
   $scope.guardarPlatillo = function() {
@@ -45,31 +63,33 @@ angular.module('starter.controllers', [])
   };
 })
 
-.controller('GuarnicionCtrl', function($scope, MenuService, $rootScope, $state){
+.controller('GuarnicionCtrl', function($scope, MenuGService, $rootScope, $state){
   console.log($rootScope.pedido);
   $scope.guarniciones = [];
+  $scope.pedido = $rootScope.pedido;
   
   $scope.guarniciones.gId = [];
   $scope.get = function (){
-    MenuService.get().then(function(data){
+    MenuGService.get().then(function(data){
       $scope.guarniciones = data.data;
-     
     });
   };
   $scope.get();
  
   $scope.checked = 0;
-  $scope.consoleLog = function(guarnicion){
-    console.log(guarnicion.g_id);
-    if(guarnicion.checked)
-      $scope.checked++;
-    else 
-      $scope.checked--;
-  };
+  $scope.pedido.guarnicion = [];
+  $scope.consoleLog = function(platillo){
+    console.log(platillo);
+  }
   
-  $scope.addGuarnicion = function(g_id){
-    
-   // $rootScope.pedidoGuarniciones.push(g_id); 
+  $scope.addGuarnicion = function(guarnicion){
+    if(guarnicion.checked){
+      $scope.checked++;
+      $scope.pedido.guarnicion.push(guarnicion);
+    }else{
+      $scope.checked--;
+      $scope.pedido.guarnicion.splice($scope.pedido.guarnicion.indexOf(guarnicion),1);
+    }
   };
 
   $scope.guardarGuarnicion = function() {
@@ -77,12 +97,12 @@ angular.module('starter.controllers', [])
   };
 })
 
-.controller('BebidaCtrl', function($scope, MenuService, $rootScope, $state){
+.controller('BebidaCtrl', function($scope, MenuBService, $rootScope, $state){
   console.log($rootScope.pedido);
   console.log($rootScope.pedidoGuarniciones);
   $scope.bebidas = [];
   $scope.get = function (){
-    MenuService.get().then(function(data){
+    MenuBService.get().then(function(data){
       $scope.bebidas = data.data;
       console.log($scope.bebidas);
     });
@@ -97,8 +117,9 @@ angular.module('starter.controllers', [])
       $scope.checked--;
   };
 
-  $scope.addBebida = function(b_id){
-    $rootScope.pedido.bebida = b_id;   
+  $scope.addBebida = function(bebida){
+    $rootScope.pedido.bebida = bebida.bebida;
+    $rootScope.pedido.bebidaId = bebida.b_id;   
   };
 
   $scope.guardarBebida = function() {

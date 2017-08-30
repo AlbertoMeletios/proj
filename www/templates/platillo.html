@@ -4,7 +4,7 @@
           
             <ion-checkbox 
             value="platillo.p_id" 
-            ng-click="addPlatillo(platillo.p_id)"
+            ng-click="addPlatillo(platillo)"
             ng-model= "platillo.checked"
             ng-change="consoleLog(platillo)"
             ng-disabled="checked >= 1 && !platillo.checked"
