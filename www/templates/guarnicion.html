@@ -1,14 +1,14 @@
 <ion-view view-title="Guarnición">
     <ion-content ng-controller="GuarnicionCtrl">
-       <ion-list ng-repeat="guarniciones in guarniciones">
+       <ion-list ng-repeat="guarnicion in guarniciones">
             <ion-checkbox 
-            ng-if="guarniciones.guarnicion !=0" 
-            value="guarniciones.g_id"
-            ng-click="addGuarnicion(guarniciones.g_id)"
-            ng-model="guarniciones.checked"
-            ng-change="consoleLog(guarniciones)"
-            ng-disabled="checked >= 2 && !guarniciones.checked" 
-            style="margin-bottom:-8px;">{{guarniciones.guarnicion}}</ion-checkbox>
+            ng-if="guarnicion.guarnicion !=0" 
+            value="guarnicion.g_id"
+            ng-click="addGuarnicion(guarnicion.g_id)"
+            ng-model="guarnicion.checked"
+            ng-change="consoleLog(guarnicion)"
+            ng-disabled="checked >= 2 && !guarnicion.checked" 
+            style="margin-bottom:-8px;">{{guarnicion.guarnicion}}</ion-checkbox>
         </ion-list> 
 <button class="button icon-right ion-chevron-right button-block button-dark" ng-click="guardarGuarnicion()">
   siguente

@@ -61,7 +61,8 @@ angular.module('cuisine', ['ionic', 'starter.controllers', 'starter.services'])
     })
     .state('confirmacion',{
       url: '/confirmacion',
-      templateUrl: 'templates/confirmacion.html'
+      templateUrl: 'templates/confirmacion.html',
+      controller: 'ConfirmacionCtrl'
     })
     .state('gracias',{
       url: '/gracias',

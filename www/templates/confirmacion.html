@@ -1,14 +1,14 @@
 <ion-view view-title="Confirmación">
-    <ion-content style=" text-align:center;">
+    <ion-content style=" text-align:center;" ng-controller="ConfirmacionCtrl">
       <h3>¿Usted pidió esto?</h3>
       <div class="card">
-  <div class="item item-text-wrap">
-    Aquí va a estar lo que se pidió
+  <div class="item item-text-wrap" >
+   <p> {{ pedido.platillo + " con " + pedido.bebida }} </p>
   </div>
 </div>
-<a href="/#/gracias"><button class="button icon-right ion-chevron-right button-block button-dark">
+<button class="button icon-right ion-chevron-right button-block button-dark" ng-click="enviarPedido()">
   Confirmar
-</button></a>
+</button>
     </ion-content>
 </ion-view>
 

@@ -1,18 +1,6 @@
 angular.module('starter.controllers', [])
 
-/*
-.controller('MenuCtrl', function($scope, PlatillosService) {
-  $scope.platillo = [];
-  $scope.get = function (){
-    PlatillosService.get().then(function(data){
-      $scope.platillo = data;
-      console.log($scope.platillo);
 
-    });
-  };
-  $scope.get();
-})
-*/
 
 .controller('MenuCtrl', function($scope, MenuService){
   $scope.menuDelDia = [];
@@ -26,11 +14,8 @@ angular.module('starter.controllers', [])
   console.log($scope.menu);
 })
 
-
-
-
 .controller('PlatilloCtrl', function($scope, MenuService, $rootScope, $state){
-  $scope.platillos = [];
+   $scope.platillos = [];
   $rootScope.pedido = {};
 
   $scope.get = function (){
@@ -43,70 +28,66 @@ angular.module('starter.controllers', [])
 
   $scope.checked = 0;
   $scope.consoleLog = function(platillo){
-    console.log(platillo.p_id);
+    console.log(platillo);
     if(platillo.checked)
       $scope.checked++;
     else 
       $scope.checked--;
   };
 
-  $scope.addPlatillo = function(p_id){
-    $rootScope.pedido.platillo = p_id;   
+  $scope.addPlatillo = function(p_id, platillo){
+    $rootScope.pedido.platilloId = p_id;
+    $rootScope.pedido.platillo = platillo; 
   };
-  
+
   $scope.guardarPlatillo = function() {
     $state.go('guarnicion');
-
   };
 })
 
 .controller('GuarnicionCtrl', function($scope, MenuService, $rootScope, $state){
+  console.log($rootScope.pedido);
   $scope.guarniciones = [];
-  //$rootScope.pedido.guarniciones = {};
   
+  $scope.guarniciones.gId = [];
   $scope.get = function (){
     MenuService.get().then(function(data){
       $scope.guarniciones = data.data;
-      console.log($scope.guarniciones);
+     
     });
   };
   $scope.get();
-
-  
+ 
   $scope.checked = 0;
-  $scope.consoleLog = function(guarniciones){
-    console.log(guarniciones.g_id);
-    if(guarniciones.checked)
+  $scope.consoleLog = function(guarnicion){
+    console.log(guarnicion.g_id);
+    if(guarnicion.checked)
       $scope.checked++;
     else 
       $scope.checked--;
   };
- 
-  $scope.addGuarnicion = function(g_id){
-   //$rootScope.guarniciones.push(g_id); 
-  };
   
+  $scope.addGuarnicion = function(g_id){
+    
+   // $rootScope.pedidoGuarniciones.push(g_id); 
+  };
+
   $scope.guardarGuarnicion = function() {
     $state.go('bebida');
   };
 })
 
-
-
 .controller('BebidaCtrl', function($scope, MenuService, $rootScope, $state){
+  console.log($rootScope.pedido);
+  console.log($rootScope.pedidoGuarniciones);
   $scope.bebidas = [];
-
   $scope.get = function (){
     MenuService.get().then(function(data){
       $scope.bebidas = data.data;
       console.log($scope.bebidas);
     });
   };
-  
   $scope.get();
-
- 
-
   $scope.checked = 0;
   $scope.consoleLog = function(bebida){
     console.log(bebida.b_id);
@@ -117,34 +98,23 @@ angular.module('starter.controllers', [])
   };
 
   $scope.addBebida = function(b_id){
-    //$rootScope.pedido.bebida = b_id;
-   
+    $rootScope.pedido.bebida = b_id;   
   };
 
   $scope.guardarBebida = function() {
     $state.go('confirmacion');
   };
-  
 })
 
+.controller('ConfirmacionCtrl', function ($scope, $rootScope, $state){
+  console.log($rootScope.pedido);
 
-.controller('PruebaCtrl', function ($scope, $stateParams, PruebaService){
-  $scope.prueba = [];
-  $scope.get = function (){
-    PruebaService.get().then(function(data){
-      $scope.prueba = data.data;
-      console.log($scope.prueba);
-
-    });
+  $scope.enviarPedido = function() {
+    $state.go('gracias');
   };
-  $scope.get();
-  //console.log($scope.g)
 })
+
 /*
-.controller('EnviarPedidoCtrl', function ($scope, $http, $rootScope){
-  $rootScope.pedido = [$scope.pedidirPlatillo];  
-  
-})*/
 .controller('GuardarPedidoCtrl',function($http,$scope){
   var guarda = {
       method: 'POST',
@@ -152,7 +122,7 @@ angular.module('starter.controllers', [])
       data:{platillo:$scope.splatillo, bebida: $scope.sbebida},
       dataType:"jsonp"
   }
-})
+})*/
 /*
 .controller('HistorialCtrl', function ($scope, $stateParams, PruebaService){
   $scope.pedido = PruebaService.get($stateParams.pedidoYear);
