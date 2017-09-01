@@ -1,0 +1,14 @@
+<ion-view view-title="Register"> 
+    <ion-content class="contLog" ng-controller="RegisterCtrl">
+      <img class="log" src="../img/log.png"/>
+      <div class="list">
+        <label class="item item-input">
+            <input type="text" placeholder="Email" ng-model="data.email">
+        </label>
+        <label class="item item-input iLog">
+            <input type="password" placeholder="Password" ng-model="data.password">
+        </label>
+      <button class="button botLog button-positive" style="margin-top:10px;" ng-click="signup()">Sign up</button> <br>
+      </div>
+    </ion-content>
+</ion-view>

@@ -1,11 +1,8 @@
-angular.module('starter.constants' [])
+angular.module('starter.constants', [])
 
 .constant('AUTH_EVENTS', {
-    notAuthenticated: 'auth-not-authenticated',
-    notAuthorized: 'auth-not-autorized'
+    notAuthenticated: 'auth-not-authenticated'
 })
-.constant('USER_ROLES', {
-    admin: 'admin_role',
-    public: 'public_role'
+.constant('API_ENDPOINT', {
+    url: 'http://etnia.digital/cuisine/api'
 })
-;

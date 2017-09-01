@@ -1,16 +1,15 @@
 <ion-view view-title="Login"> 
-    <ion-content class="contLog">
+    <ion-content class="contLog" ng-controller="LoginCtrl">
       <img class="log" src="../img/log.png"/>
       <div class="list">
         <label class="item item-input">
-            <input type="text" placeholder="First Name">
+            <input type="text" placeholder="Email" ng-model="user.email">
         </label>
         <label class="item item-input iLog">
-            <input type="text" placeholder="Last Name">
+            <input type="password" placeholder="Password" ng-model="user.password">
         </label>
-      <a href="/#/inicio"><button class="button botLog" style="margin-top:10px;">
-        entrar
-      </button></a>
+      <button class="button botLog" style="margin-top:10px;" ng-click="login()">Login</button> <br>
+      <button class="button button-clear button-positive" style="margin-top:10px;" ui-sref="register">Register now!</button>      
       </div>
     </ion-content>
 </ion-view>

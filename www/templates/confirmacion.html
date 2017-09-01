@@ -3,7 +3,11 @@
       <h3>¿Usted pidió esto?</h3>
       <div class="card">
   <div class="item item-text-wrap" >
-   <p> {{ pedido.platillo + " con " + pedido.guarnicion[0].guarnicion + ", " +  pedido.guarnicion[1].guarnicion + " y " + pedido.bebida + " 😁"}} </p>
+   <p> {{ pedido.platillo + " con" }} </p>
+   <p>{{ pedido.guarnicion[0].guarnicion }}</p>
+   <p>{{ pedido.guarnicion[1].guarnicion}}</p>
+   <p>{{ pedido.bebida }}</p>
+ 
   </div>
 </div>
 <button class="button icon-right button-block button-dark" ng-click="enviarPedido()">

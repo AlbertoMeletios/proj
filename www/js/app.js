@@ -1,41 +1,41 @@
 
-angular.module('cuisine', ['ionic', 'starter.controllers', 'starter.services'])
+angular.module('cuisine', ['ionic', 'starter.controllers', 'starter.services', 'starter.constants'])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
-    // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
-    // for form inputs)
     if (window.cordova && window.cordova.plugins && window.cordova.plugins.Keyboard) {
       cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
       cordova.plugins.Keyboard.disableScroll(true);
 
     }
     if (window.StatusBar) {
-      // org.apache.cordova.statusbar required
       StatusBar.styleDefault();
     }
   });
 })
 
 .config(function($stateProvider, $urlRouterProvider) {
-
-  // Ionic uses AngularUI Router which uses the concept of states
-  // Learn more here: https://github.com/angular-ui/ui-router
-  // Set up the various states which the app can be in.
-  // Each state's controller can be found in controllers.js
   
   $stateProvider
-    .state('login',{
+    .state('login', {
       url:'/login',
-      templateUrl: 'templates/login.html'
+      templateUrl: 'templates/login.html',
+      controller: 'LoginCtrl'
     })
 
+    .state('register', {
+      url: '/register',
+      templateUrl: 'templates/register.html',
+      controller: 'RegisterCtrl'
+    })
+ 
 
-    .state('inicio',{
+
+    .state('inicio', {
       url:'/inicio',
-      templateUrl: 'templates/inicio.html'
+      templateUrl: 'templates/inicio.html',
+      controller: 'InicioCtrl'
     })
-
 
     .state('menu',{
       url:'/menu',
@@ -88,10 +88,18 @@ angular.module('cuisine', ['ionic', 'starter.controllers', 'starter.services'])
       controller: 'PruebaCtrl'
     })
     
+  $urlRouterProvider.otherwise('login');
 
+})
 
-
-  // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/login');
-
+.run(function ($rootScope, $state, AuthService, AUTH_EVENTS) {
+  $rootScope.$on('$stateChangeStart', function (event, next, nextParams, fromState) {
+    if (!AuthService.isAuthenticated()) {
+      console.log(next.name);
+      if (next.name !== 'login' && next.name !== 'register') {
+        event.preventDefault();
+        $state.go('login');
+      }
+    }
+  });
 });

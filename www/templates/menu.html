@@ -17,5 +17,23 @@
                 <!--<a class="item" ng-if="menuDelDia.bebida.indexOf(menuDelDia.bebida) === 0">{{menuDelDia.bebida}}</a>-->
                 <a class="item">{{bebida.bebida}}</a>
             </div>
+            <h1 class="title">Member area</h1>
+            <div class="buttons">
+              <button class="button button-clear" ng-click="logout()">Logout</button>
+            </div>
+          </ion-header-bar>
+          <ion-content class="padding">
+            <div class="card">
+              <div class="item item-text-wrap">
+                {{memberinfo}}
+              </div>
+            </div>
+            <button class="button button-full button-assertive" ng-click="destroySession()">
+              Destroy token
+            </button>
+            <button class="button button-full button-balanced" ng-click="getInfo()">
+              Get Memberinfo
+            </button>
+
         </ion-content>
 </ion-view>
