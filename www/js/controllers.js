@@ -1,71 +1,70 @@
 angular.module('starter.controllers', [])
 
-
-.controller('LoginCtrl',function($scope, AuthService, $ionicPopup, $state){
-  $scope.user = {
-    email: '',
-    password: ''
+.controller ('LoginCtrl', function($scope, UserService, $state, $ionicPopup, $rootScope){ 
+  $scope.usuarios = [];
+  $scope.estado='';
+  $scope.get = function (){
+    UserService.get().then(function(data){
+      $scope.usuarios = data.data;	   
+      //console.log($scope.usuarios);	   	
+    });
   };
-  $scope.login = function ( ){
-    AuthService.login($scope.user).then(function(msg) {
+  $scope.get(); 
+  
+  $scope.entrar = function(){
+     for( var i=0;i < $scope.usuarios.length; i++){
+      if($scope.usuarios[i].email == $scope.user.email && $scope.usuarios[i].password == $scope.user.password){
+        $scope.estado= 'True';
+        $rootScope.autor = $scope.usuarios[i].id;
+        break;
+      }
+        $scope.estado= 'False';   	   
+     }
+     if ($scope.estado == 'True'){
+       console.log($rootScope.autor)
       $state.go('inicio');
-    }, function(errMsg) {
+     } else{
       var alertPopup = $ionicPopup.alert({
-        title: 'Login failed!',
-        template: errMsg
+        title :'ERROR',
+        template: '¡email o contraseña incorrecta!'
       });
-    });    
-  };
-})
-.controller('RegisterCtrl',function($scope, AuthService, $ionicPopup, $state){
-  $scope.user = {
-    email: '',
-    password: ''
-  };
- 
-  $scope.signup = function() {
-    AuthService.register($scope.user).then(function(msg) {
-      $state.go('login');
-      var alertPopup = $ionicPopup.alert({
-        title: 'Register success!',
-        template: msg
-      });
-    }, function(errMsg) {
-      var alertPopup = $ionicPopup.alert({
-        title: 'Register failed!',
-        template: errMsg
-      });
-    });
+     }
   };
 })
 
-.controller('InicioCtrl', function($scope, AuthService, API_ENDPOINT, $http, $state) {
-  $scope.destroySession = function() {
-
-  };
-  $scope.getInfo = function(){
-    $http.get(API_ENDPOINT.url + 'usuarios').then(function(result) {
-      $scope.userinfo = result.data.msg;
+.controller('SignupCtrl',function($scope, $ionicPopup, $state, $http){
+  $scope.data = {};
+ $scope.signup = function () {
+   var request = $http({
+     method: "post",
+     url: "http://etnia.digital/cuisine/api/signup",
+     data: {
+       email: $scope.data.email,
+       password: $scope.data.password
+     },
+headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+   })
+   .success(function(data){
+    $ionicPopup.alert({
+      title: 'HECHO',
+      template: 'Usted ha creado un nuevo usuario'
     });
-  };
-  $scope.logout = function() {
-    AuthService.logout();
-    $state.go('login')
-  };
-})
-
-.controller('AppCtrl',function($scope, AuthService, $ionicPopup, $state, AUTH_EVENTS){
-  $scope.$on(AUTH_EVENTS.notAutenticated, function(event) {
-    AuthService.logout();
-    $state.go('login');
-    var alertPopup = $ionicPopup.alert({
-      title: 'Session Lost!',
-      template: 'Sorry, You hace to login again.'
-    });
+   })
+   .error(function (errResponse, status) {
+    if(status == 409){
+          $ionicPopup.alert({
+              title: 'ERROR',
+            template: '¡Eeste email no es válido!'
+      });
+    }
   });
+ }
+}) 
+
+
+.controller('InicioCtrl', function($scope){
+
 })
-
-
 .controller('MenuCtrl', function($scope, MenuPService, MenuGService, MenuBService){
   $scope.menuPlatillo = [];
   $scope.getP = function (){
@@ -118,7 +117,8 @@ angular.module('starter.controllers', [])
   };
 
   $scope.addPlatillo = function(platillo){
-    $rootScope.pedido.platilloId = platillo.p_id;
+    $rootScope.pedido.autor = $rootScope.autor;
+    $rootScope.pedido.platillo_id = platillo.p_id;
     $rootScope.pedido.platillo = platillo.platillo; 
   };
 
@@ -183,7 +183,7 @@ angular.module('starter.controllers', [])
 
   $scope.addBebida = function(bebida){
     $rootScope.pedido.bebida = bebida.bebida;
-    $rootScope.pedido.bebidaId = bebida.b_id;   
+    $rootScope.pedido.bebida_id = bebida.b_id;   
   };
 
   $scope.guardarBebida = function() {
@@ -191,17 +191,34 @@ angular.module('starter.controllers', [])
   };
 })
 
-.controller('ConfirmacionCtrl', function ($scope, $rootScope, $state, $http, PedidosService){
+.controller('ConfirmacionCtrl', function ($scope, $rootScope, $state, $http, $ionicPopup, PedidosService){
   $scope.data = [];
+  console.log($rootScope.pedido);
   $scope.enviarPedido = function() {
-   var url = 'http://etnia.digital/cuisine/api/pedidos'
-    $http.post(url,{
-      autor: 1,
-      platillo_id: 1,
-      bebida_id: 1
-    });
-    //.push($rootScope.pedido)
-    $state.go('gracias');
+    var request = $http({
+      method: "post",
+      url: "http://etnia.digital/cuisine/api/pedidos",
+      data: {
+        autor:  $rootScope.pedido.autor,
+        platillo_id:  $rootScope.pedido.platillo_id,
+        bebida_id:  $rootScope.pedido.bebida_id,
+        guarniciones: $rootScope.pedido.guarnicion.g_id,
+      },
+ headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+    })
+    .success(function(data){
+     $ionicPopup.alert({
+       title: 'HECHO',
+       template: 'Usted ha enviado un pedido'
+     });
+    })
+    .error(function (errResponse, status) {
+     if(status == 409){
+           $ionicPopup.alert({
+               title: 'ERROR'
+       });
+     }
+   });
   };
 })
 

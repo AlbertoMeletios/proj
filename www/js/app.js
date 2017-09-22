@@ -15,21 +15,19 @@ angular.module('cuisine', ['ionic', 'starter.controllers', 'starter.services', '
 })
 
 .config(function($stateProvider, $urlRouterProvider) {
-  
   $stateProvider
     .state('login', {
       url:'/login',
       templateUrl: 'templates/login.html',
       controller: 'LoginCtrl'
     })
-
-    .state('register', {
-      url: '/register',
-      templateUrl: 'templates/register.html',
-      controller: 'RegisterCtrl'
+    
+    .state('signup', {
+      url: '/signup',
+      templateUrl: 'templates/signup.html',
+     controller: 'SignupCtrl'
     })
  
-
 
     .state('inicio', {
       url:'/inicio',
@@ -91,7 +89,7 @@ angular.module('cuisine', ['ionic', 'starter.controllers', 'starter.services', '
   $urlRouterProvider.otherwise('login');
 
 })
-
+/*
 .run(function ($rootScope, $state, AuthService, AUTH_EVENTS) {
   $rootScope.$on('$stateChangeStart', function (event, next, nextParams, fromState) {
     if (!AuthService.isAuthenticated()) {
@@ -102,4 +100,4 @@ angular.module('cuisine', ['ionic', 'starter.controllers', 'starter.services', '
       }
     }
   });
-});
+})*/;
